@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+
+{% block msg %}
+{% if messages %}
+{% for message in messages %}
+<div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %}>
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock msg %}
+
+{% block content %}
+
+<form method="POST" novalidate>
+    {% csrf_token %}
+    <table>
+        {{form}}
+
+    </table>
+    <!-- {% for fm in form %}
+    <div class="form-group">
+        {{fm.label_tag}} {{fm}}
+        <small id="emailHelp" class="form-text text-muted">{{fm.errors|striptags}}</small>
+    </div>
+
+    {% endfor %} -->
+
+
+    <input type="submit" value="Submit">
+</form>
+{% endblock content %}

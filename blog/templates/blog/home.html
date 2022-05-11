@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+
+{% for blog in blogs %}
+<div class="card" style="width: 18rem;margin: 10px; ">
+    {% if blog.img %}
+    <img class="card-img-top" src="{{ blog.img.url }}" alt="Card image cap" height="250">
+    {% else %}
+    <p style="align-content: center ;">No images</p>
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{blog.title}}</h5>
+        <p class="card-text">{{blog.body}}</p>
+
+
+        <form action="{% url 'updateblog' blog.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Edit" class="btn btn-primary btn-sm">
+
+        </form>
+        <form action="{% url 'deleteblog' blog.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+
+        </form>
+
+
+    </div>
+</div>
+<br>
+{% endfor %}
+
+{% endblock content %}
